@@ -27,7 +27,7 @@ final class TMDBService {
     private let baseURL = "https://api.themoviedb.org/3"
     static let imageBaseURL = "https://image.tmdb.org/t/p/w500"
 
-    private let accessToken = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ODI0YzNlZGIwMzY3NTNhNjdmZDY5NmNhODIxMWJkZSIsIm5iZiI6MTc3Mjg4MDYyMC4yNjMsInN1YiI6IjY5YWMwMmVjZWFmM2U3Nzc1Mjc5ZjY4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wo5JPL6JQomk7a-90TG3evYkXdXTTuHgH4_GLxzTfy0"
+    private let accessToken = Secrets.tmdbAccessToken
 
     private let cacheFileName = "popular_movies_cache.json"
 

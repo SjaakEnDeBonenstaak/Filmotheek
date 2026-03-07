@@ -22,6 +22,7 @@ Pods/
 # Environment / secrets
 .env
 *.env.local
+Filmotheek/Config/Secrets.swift
 
 # macOS
 .DS_Store
