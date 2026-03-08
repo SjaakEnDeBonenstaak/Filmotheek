@@ -66,6 +66,7 @@ struct CollectionView: View {
                 selectedWatched = watched
             } label: {
                 WatchedMovieRowView(watchedMovie: watched)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .listRowBackground(

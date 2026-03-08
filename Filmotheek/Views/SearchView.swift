@@ -71,6 +71,7 @@ struct SearchView: View {
                 selectedMovie = movie
             } label: {
                 MovieRowView(movie: movie)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .listRowBackground(
