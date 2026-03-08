@@ -94,31 +94,8 @@ struct MovieDetailView: View {
     }
 
     private var posterView: some View {
-        Group {
-            if let url = movie.posterURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image.resizable().aspectRatio(contentMode: .fill)
-                    case .failure:
-                        posterPlaceholder
-                    default:
-                        posterPlaceholder.overlay(ProgressView())
-                    }
-                }
-            } else {
-                posterPlaceholder
-            }
-        }
-        .frame(width: 100, height: 150)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(radius: 4)
-    }
-
-    private var posterPlaceholder: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.secondary.opacity(0.2))
-            .overlay(Image(systemName: "film").foregroundStyle(.secondary))
+        PosterImageView(url: movie.posterURL, width: 100, height: 150, cornerRadius: 10)
+            .shadow(radius: 4)
     }
 
     // MARK: - Detail

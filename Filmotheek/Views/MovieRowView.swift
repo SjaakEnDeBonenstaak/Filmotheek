@@ -5,43 +5,11 @@ struct MovieRowView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            posterImage
+            PosterImageView(url: movie.posterURL, width: 56, height: 84, cornerRadius: 6)
             movieInfo
             Spacer()
         }
         .padding(.vertical, 4)
-    }
-
-    private var posterImage: some View {
-        Group {
-            if let url = movie.posterURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    case .failure:
-                        placeholderPoster
-                    default:
-                        ProgressView()
-                    }
-                }
-            } else {
-                placeholderPoster
-            }
-        }
-        .frame(width: 56, height: 84)
-        .clipShape(RoundedRectangle(cornerRadius: 6))
-    }
-
-    private var placeholderPoster: some View {
-        RoundedRectangle(cornerRadius: 6)
-            .fill(Color.secondary.opacity(0.2))
-            .overlay(
-                Image(systemName: "film")
-                    .foregroundStyle(.secondary)
-            )
     }
 
     private var movieInfo: some View {
@@ -66,43 +34,11 @@ struct WatchedMovieRowView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            posterImage
+            PosterImageView(url: movie.posterURL, width: 56, height: 84, cornerRadius: 6)
             movieInfo
             Spacer()
         }
         .padding(.vertical, 4)
-    }
-
-    private var posterImage: some View {
-        Group {
-            if let url = movie.posterURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    case .failure:
-                        placeholderPoster
-                    default:
-                        ProgressView()
-                    }
-                }
-            } else {
-                placeholderPoster
-            }
-        }
-        .frame(width: 56, height: 84)
-        .clipShape(RoundedRectangle(cornerRadius: 6))
-    }
-
-    private var placeholderPoster: some View {
-        RoundedRectangle(cornerRadius: 6)
-            .fill(Color.secondary.opacity(0.2))
-            .overlay(
-                Image(systemName: "film")
-                    .foregroundStyle(.secondary)
-            )
     }
 
     private var movieInfo: some View {
