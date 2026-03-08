@@ -35,4 +35,16 @@ import SwiftData
         guard let path = posterPath else { return nil }
         return URL(string: TMDBService.imageBaseURL + path)
     }
+
+    var asTMDBMovie: TMDBMovie {
+        TMDBMovie(
+            id: tmdbID,
+            title: title,
+            overview: overview,
+            posterPath: posterPath,
+            releaseDate: nil,
+            voteAverage: nil,
+            genreIDs: nil
+        )
+    }
 }

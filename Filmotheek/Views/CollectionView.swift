@@ -16,11 +16,11 @@ struct CollectionView: View {
         AdaptiveNavigationView(title: "Collectie") {
             listContent
                 .navigationDestination(for: WatchedMovie.self) { watched in
-                    MovieDetailView(movie: tmdbMovie(from: watched))
+                    MovieDetailView(movie: watched.asTMDBMovie)
                 }
         } detail: {
             if let watched = selectedWatched {
-                MovieDetailView(movie: tmdbMovie(from: watched))
+                MovieDetailView(movie: watched.asTMDBMovie)
             } else {
                 ContentUnavailableView(
                     "Selecteer een film",
@@ -96,17 +96,5 @@ struct CollectionView: View {
         for index in offsets {
             modelContext.delete(sortedMovies[index])
         }
-    }
-
-    private func tmdbMovie(from watched: WatchedMovie) -> TMDBMovie {
-        TMDBMovie(
-            id: watched.tmdbID,
-            title: watched.title,
-            overview: watched.overview,
-            posterPath: watched.posterPath,
-            releaseDate: nil,
-            voteAverage: nil,
-            genreIDs: nil
-        )
     }
 }
