@@ -13,28 +13,20 @@ struct CollectionView: View {
     }
 
     var body: some View {
-        if horizontalSizeClass == .regular {
-            NavigationSplitView {
-                listContent
-                    .navigationTitle("Collectie")
-            } detail: {
-                if let watched = selectedWatched {
+        AdaptiveNavigationView(title: "Collectie") {
+            listContent
+                .navigationDestination(for: WatchedMovie.self) { watched in
                     MovieDetailView(movie: tmdbMovie(from: watched))
-                } else {
-                    ContentUnavailableView(
-                        "Selecteer een film",
-                        systemImage: "popcorn",
-                        description: Text("Kies een film uit je collectie")
-                    )
                 }
-            }
-        } else {
-            NavigationStack {
-                listContent
-                    .navigationTitle("Collectie")
-                    .navigationDestination(for: WatchedMovie.self) { watched in
-                        MovieDetailView(movie: tmdbMovie(from: watched))
-                    }
+        } detail: {
+            if let watched = selectedWatched {
+                MovieDetailView(movie: tmdbMovie(from: watched))
+            } else {
+                ContentUnavailableView(
+                    "Selecteer een film",
+                    systemImage: "popcorn",
+                    description: Text("Kies een film uit je collectie")
+                )
             }
         }
     }

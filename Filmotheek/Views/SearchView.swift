@@ -6,28 +6,20 @@ struct SearchView: View {
     @State private var selectedMovie: TMDBMovie?
 
     var body: some View {
-        if horizontalSizeClass == .regular {
-            NavigationSplitView {
-                listContent
-                    .navigationTitle("Zoeken")
-            } detail: {
-                if let movie = selectedMovie {
+        AdaptiveNavigationView(title: "Zoeken") {
+            listContent
+                .navigationDestination(for: TMDBMovie.self) { movie in
                     MovieDetailView(movie: movie)
-                } else {
-                    ContentUnavailableView(
-                        "Selecteer een film",
-                        systemImage: "film",
-                        description: Text("Kies een film uit de lijst")
-                    )
                 }
-            }
-        } else {
-            NavigationStack {
-                listContent
-                    .navigationTitle("Zoeken")
-                    .navigationDestination(for: TMDBMovie.self) { movie in
-                        MovieDetailView(movie: movie)
-                    }
+        } detail: {
+            if let movie = selectedMovie {
+                MovieDetailView(movie: movie)
+            } else {
+                ContentUnavailableView(
+                    "Selecteer een film",
+                    systemImage: "film",
+                    description: Text("Kies een film uit de lijst")
+                )
             }
         }
     }
