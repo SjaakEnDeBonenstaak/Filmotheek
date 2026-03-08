@@ -1,17 +1,17 @@
 import Foundation
 import Observation
 
+enum SortOrder: String, CaseIterable, Identifiable {
+    case dateDescending = "Nieuwste eerst"
+    case dateAscending = "Oudste eerst"
+    case ratingDescending = "Hoogste beoordeling"
+    case titleAscending = "A–Z"
+
+    var id: String { rawValue }
+}
+
 @Observable final class CollectionViewModel {
     var sortOrder: SortOrder = .dateDescending
-
-    enum SortOrder: String, CaseIterable, Identifiable {
-        case dateDescending = "Nieuwste eerst"
-        case dateAscending = "Oudste eerst"
-        case ratingDescending = "Hoogste beoordeling"
-        case titleAscending = "A–Z"
-
-        var id: String { rawValue }
-    }
 
     func sorted(_ movies: [WatchedMovie]) -> [WatchedMovie] {
         switch sortOrder {

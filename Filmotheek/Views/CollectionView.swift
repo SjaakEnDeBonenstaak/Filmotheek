@@ -82,7 +82,7 @@ struct CollectionView: View {
 
     private var sortPicker: some View {
         Picker("Sorteren", selection: $viewModel.sortOrder) {
-            ForEach(CollectionViewModel.SortOrder.allCases) { order in
+            ForEach(SortOrder.allCases) { order in
                 Text(order.rawValue).tag(order)
             }
         }
