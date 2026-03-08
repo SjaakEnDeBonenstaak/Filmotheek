@@ -13,6 +13,8 @@ enum SortOrder: String, CaseIterable, Identifiable {
 @Observable final class CollectionViewModel {
     var sortOrder: SortOrder = .dateDescending
 
+    // `movies` is passed in from the View's @Query result because SwiftData's @Query
+    // macro must live in a View, not in an @Observable ViewModel.
     func sorted(_ movies: [WatchedMovie]) -> [WatchedMovie] {
         switch sortOrder {
         case .dateDescending:  return movies.sorted { $0.watchedDate > $1.watchedDate }
