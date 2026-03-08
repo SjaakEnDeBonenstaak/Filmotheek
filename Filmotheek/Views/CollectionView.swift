@@ -65,7 +65,7 @@ struct CollectionView: View {
             Button {
                 selectedWatched = watched
             } label: {
-                WatchedMovieRowView(movie: watched)
+                WatchedMovieRowView(watchedMovie: watched)
             }
             .buttonStyle(.plain)
             .listRowBackground(
@@ -75,7 +75,7 @@ struct CollectionView: View {
             )
         } else {
             NavigationLink(value: watched) {
-                WatchedMovieRowView(movie: watched)
+                WatchedMovieRowView(watchedMovie: watched)
             }
         }
     }
