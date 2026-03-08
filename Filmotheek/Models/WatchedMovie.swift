@@ -33,6 +33,6 @@ import SwiftData
 
     var posterURL: URL? {
         guard let path = posterPath else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w500" + path)
+        return URL(string: TMDBService.imageBaseURL + path)
     }
 }
