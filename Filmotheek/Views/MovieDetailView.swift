@@ -90,7 +90,7 @@ struct MovieDetailView: View {
                     }
                     if let rating = detail.voteAverage {
                         Label(String(format: "%.1f / 10", rating), systemImage: "star.fill")
-                            .foregroundStyle(Color.appAccent)
+                            .foregroundStyle(Color.appDark)
                             .font(.subheadline)
                     }
                 }
@@ -162,7 +162,7 @@ struct MovieDetailView: View {
                         }
                     }
                 } else {
-                    Circle().fill(Color.secondary.opacity(0.2))
+                    Circle().fill(Color.appPrimary.opacity(0.12))
                 }
             }
             .frame(width: 64, height: 64)
@@ -185,7 +185,7 @@ struct MovieDetailView: View {
 
     private func errorSection(message: String) -> some View {
         Label(message, systemImage: "exclamationmark.triangle")
-            .foregroundStyle(.orange)
+            .foregroundStyle(Color.appAccentDark)
             .padding(.horizontal)
     }
 
@@ -203,8 +203,10 @@ struct MovieDetailView: View {
                     .padding(.horizontal)
 
                 TextField("Opmerking (optioneel)", text: $draftComment, axis: .vertical)
-                    .textFieldStyle(.roundedBorder)
                     .lineLimit(3...6)
+                    .padding(10)
+                    .background(Color.appPrimary.opacity(0.08), in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.appPrimary.opacity(0.35), lineWidth: 1))
                     .padding(.horizontal)
 
                 Button(action: saveWatched) {

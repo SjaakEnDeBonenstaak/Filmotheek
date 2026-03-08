@@ -20,6 +20,7 @@ struct SearchView: View {
                     systemImage: "film",
                     description: Text("Kies een film uit de lijst")
                 )
+                .background(Color.appBackground)
             }
         }
     }
@@ -53,6 +54,7 @@ struct SearchView: View {
         .toolbarBackground(Color.appPrimary, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarBackground(Color.appBackground, for: .tabBar)
+        .background(Color.appBackground)
     }
 
     // MARK: - Movie list
@@ -122,7 +124,7 @@ struct SearchView: View {
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .background(selected ? Color.appAccent : Color.appPrimary.opacity(0.12))
-                .foregroundStyle(selected ? Color.appDark : Color.appPrimary)
+                .foregroundStyle(Color.appDark)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)

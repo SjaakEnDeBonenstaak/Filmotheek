@@ -23,7 +23,7 @@ struct MovieRowView: View {
             if let rating = movie.voteAverage {
                 Label(String(format: "%.1f", rating), systemImage: "star.fill")
                     .font(.caption)
-                    .foregroundStyle(Color.appAccent)
+                    .foregroundStyle(Color.appDark)
             }
         }
     }

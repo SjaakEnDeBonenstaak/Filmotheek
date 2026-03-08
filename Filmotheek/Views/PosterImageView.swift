@@ -29,7 +29,7 @@ struct PosterImageView: View {
 
     private var placeholder: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .fill(Color.secondary.opacity(0.2))
-            .overlay(Image(systemName: "film").foregroundStyle(.secondary))
+            .fill(Color.appPrimary.opacity(0.12))
+            .overlay(Image(systemName: "film").foregroundStyle(Color.appPrimary))
     }
 }

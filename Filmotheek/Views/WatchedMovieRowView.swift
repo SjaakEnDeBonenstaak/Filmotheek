@@ -26,7 +26,7 @@ struct WatchedMovieRowView: View {
             }
             Text(watchedMovie.watchedDate.formatted(date: .abbreviated, time: .omitted))
                 .font(.caption2)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(.secondary)
         }
     }
 }

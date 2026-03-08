@@ -27,6 +27,7 @@ struct CollectionView: View {
                     systemImage: "popcorn",
                     description: Text("Kies een film uit je collectie")
                 )
+                .background(Color.appBackground)
             }
         }
     }
@@ -62,6 +63,7 @@ struct CollectionView: View {
         .toolbarBackground(Color.appPrimary, for: .navigationBar)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarBackground(Color.appBackground, for: .tabBar)
+        .background(Color.appBackground)
     }
 
     @ViewBuilder
