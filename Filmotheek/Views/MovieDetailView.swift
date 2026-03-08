@@ -236,6 +236,7 @@ struct MovieDetailView: View {
                 tmdbID: movie.id,
                 title: movie.title,
                 posterPath: movie.posterPath,
+                releaseDate: movie.releaseDate,
                 rating: draftRating,
                 comment: draftComment,
                 watchedDate: Date(),

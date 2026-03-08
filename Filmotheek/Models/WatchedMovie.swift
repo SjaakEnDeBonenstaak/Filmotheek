@@ -5,6 +5,7 @@ import SwiftData
     var tmdbID: Int
     var title: String
     var posterPath: String?
+    var releaseDate: String?
     var rating: Int
     var comment: String
     var watchedDate: Date
@@ -15,6 +16,7 @@ import SwiftData
         tmdbID: Int,
         title: String,
         posterPath: String? = nil,
+        releaseDate: String? = nil,
         rating: Int = 3,
         comment: String = "",
         watchedDate: Date = Date(),
@@ -24,6 +26,7 @@ import SwiftData
         self.tmdbID = tmdbID
         self.title = title
         self.posterPath = posterPath
+        self.releaseDate = releaseDate
         self.rating = rating
         self.comment = comment
         self.watchedDate = watchedDate
@@ -42,7 +45,7 @@ import SwiftData
             title: title,
             overview: overview,
             posterPath: posterPath,
-            releaseDate: nil,
+            releaseDate: releaseDate,
             voteAverage: nil,
             genreIDs: nil
         )
