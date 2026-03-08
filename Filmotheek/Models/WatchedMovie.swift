@@ -5,6 +5,7 @@ import SwiftData
     var tmdbID: Int
     var title: String
     var posterPath: String?
+    var releaseDate: String?
     var rating: Int
     var comment: String
     var watchedDate: Date
@@ -15,6 +16,7 @@ import SwiftData
         tmdbID: Int,
         title: String,
         posterPath: String? = nil,
+        releaseDate: String? = nil,
         rating: Int = 3,
         comment: String = "",
         watchedDate: Date = Date(),
@@ -24,6 +26,7 @@ import SwiftData
         self.tmdbID = tmdbID
         self.title = title
         self.posterPath = posterPath
+        self.releaseDate = releaseDate
         self.rating = rating
         self.comment = comment
         self.watchedDate = watchedDate
@@ -33,6 +36,18 @@ import SwiftData
 
     var posterURL: URL? {
         guard let path = posterPath else { return nil }
-        return URL(string: "https://image.tmdb.org/t/p/w500" + path)
+        return URL(string: TMDBService.imageBaseURL + path)
+    }
+
+    var asTMDBMovie: TMDBMovie {
+        TMDBMovie(
+            id: tmdbID,
+            title: title,
+            overview: overview,
+            posterPath: posterPath,
+            releaseDate: releaseDate,
+            voteAverage: nil,
+            genreIDs: nil
+        )
     }
 }

@@ -13,28 +13,20 @@ struct CollectionView: View {
     }
 
     var body: some View {
-        if horizontalSizeClass == .regular {
-            NavigationSplitView {
-                listContent
-                    .navigationTitle("Collectie")
-            } detail: {
-                if let watched = selectedWatched {
-                    MovieDetailView(movie: tmdbMovie(from: watched))
-                } else {
-                    ContentUnavailableView(
-                        "Selecteer een film",
-                        systemImage: "popcorn",
-                        description: Text("Kies een film uit je collectie")
-                    )
+        AdaptiveNavigationView(title: "Collectie") {
+            listContent
+                .navigationDestination(for: WatchedMovie.self) { watched in
+                    MovieDetailView(movie: watched.asTMDBMovie)
                 }
-            }
-        } else {
-            NavigationStack {
-                listContent
-                    .navigationTitle("Collectie")
-                    .navigationDestination(for: WatchedMovie.self) { watched in
-                        MovieDetailView(movie: tmdbMovie(from: watched))
-                    }
+        } detail: {
+            if let watched = selectedWatched {
+                MovieDetailView(movie: watched.asTMDBMovie)
+            } else {
+                ContentUnavailableView(
+                    "Selecteer een film",
+                    systemImage: "popcorn",
+                    description: Text("Kies een film uit je collectie")
+                )
             }
         }
     }
@@ -73,7 +65,8 @@ struct CollectionView: View {
             Button {
                 selectedWatched = watched
             } label: {
-                WatchedMovieRowView(movie: watched)
+                WatchedMovieRowView(watchedMovie: watched)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .listRowBackground(
@@ -83,14 +76,14 @@ struct CollectionView: View {
             )
         } else {
             NavigationLink(value: watched) {
-                WatchedMovieRowView(movie: watched)
+                WatchedMovieRowView(watchedMovie: watched)
             }
         }
     }
 
     private var sortPicker: some View {
         Picker("Sorteren", selection: $viewModel.sortOrder) {
-            ForEach(CollectionViewModel.SortOrder.allCases) { order in
+            ForEach(SortOrder.allCases) { order in
                 Text(order.rawValue).tag(order)
             }
         }
@@ -104,17 +97,5 @@ struct CollectionView: View {
         for index in offsets {
             modelContext.delete(sortedMovies[index])
         }
-    }
-
-    private func tmdbMovie(from watched: WatchedMovie) -> TMDBMovie {
-        TMDBMovie(
-            id: watched.tmdbID,
-            title: watched.title,
-            overview: watched.overview,
-            posterPath: watched.posterPath,
-            releaseDate: nil,
-            voteAverage: nil,
-            genreIDs: nil
-        )
     }
 }

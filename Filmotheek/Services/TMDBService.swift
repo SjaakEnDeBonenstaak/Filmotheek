@@ -9,7 +9,7 @@ enum TMDBError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .missingAPIKey:
-            return "TMDB Read Access Token ontbreekt. Voeg TMDB_API_KEY toe aan Info.plist."
+            return "TMDB Read Access Token missing. Add the token to Secrets.swift."
         case .invalidURL:
             return "Ongeldige URL."
         case .networkError(let e):

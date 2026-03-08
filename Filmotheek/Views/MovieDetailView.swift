@@ -46,8 +46,12 @@ struct MovieDetailView: View {
                 )
             }
         }
-        .task {
+        .task(id: movie.id) {
             await viewModel.load(movieID: movie.id)
+        }
+        .onChange(of: movie.id) {
+            draftRating = watchedMovie?.rating ?? 3
+            draftComment = watchedMovie?.comment ?? ""
         }
         .onAppear {
             if let watched = watchedMovie {
@@ -94,31 +98,8 @@ struct MovieDetailView: View {
     }
 
     private var posterView: some View {
-        Group {
-            if let url = movie.posterURL {
-                AsyncImage(url: url) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image.resizable().aspectRatio(contentMode: .fill)
-                    case .failure:
-                        posterPlaceholder
-                    default:
-                        posterPlaceholder.overlay(ProgressView())
-                    }
-                }
-            } else {
-                posterPlaceholder
-            }
-        }
-        .frame(width: 100, height: 150)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
-        .shadow(radius: 4)
-    }
-
-    private var posterPlaceholder: some View {
-        RoundedRectangle(cornerRadius: 10)
-            .fill(Color.secondary.opacity(0.2))
-            .overlay(Image(systemName: "film").foregroundStyle(.secondary))
+        PosterImageView(url: movie.posterURL, width: 100, height: 150, cornerRadius: 10)
+            .shadow(radius: 4)
     }
 
     // MARK: - Detail
@@ -259,6 +240,7 @@ struct MovieDetailView: View {
                 tmdbID: movie.id,
                 title: movie.title,
                 posterPath: movie.posterPath,
+                releaseDate: movie.releaseDate,
                 rating: draftRating,
                 comment: draftComment,
                 watchedDate: Date(),
