@@ -50,6 +50,8 @@ struct CollectionView: View {
                     .onDelete(perform: deleteMovies)
                 }
                 .listStyle(.plain)
+                .scrollContentBackground(.hidden)
+                .background(Color.appBackground)
             }
         }
         .toolbar {
@@ -57,6 +59,9 @@ struct CollectionView: View {
                 EditButton()
             }
         }
+        .toolbarBackground(Color.appPrimary, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(Color.appBackground, for: .tabBar)
     }
 
     @ViewBuilder
@@ -71,13 +76,14 @@ struct CollectionView: View {
             .buttonStyle(.plain)
             .listRowBackground(
                 selectedWatched?.tmdbID == watched.tmdbID
-                    ? Color.accentColor.opacity(0.12)
-                    : Color.clear
+                    ? Color.appAccent.opacity(0.25)
+                    : Color.appBackground
             )
         } else {
             NavigationLink(value: watched) {
                 WatchedMovieRowView(watchedMovie: watched)
             }
+            .listRowBackground(Color.appBackground)
         }
     }
 
@@ -89,6 +95,7 @@ struct CollectionView: View {
         }
         .pickerStyle(.menu)
         .listRowSeparator(.hidden)
+        .listRowBackground(Color.appBackground)
     }
 
     // MARK: - Helpers

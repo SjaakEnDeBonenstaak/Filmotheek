@@ -8,7 +8,7 @@ struct StarRatingReadOnly: View {
         HStack(spacing: 2) {
             ForEach(1...maxRating, id: \.self) { star in
                 Image(systemName: star <= rating ? "star.fill" : "star")
-                    .foregroundStyle(star <= rating ? .yellow : .gray)
+                    .foregroundStyle(star <= rating ? Color.appAccent : Color.appPrimary.opacity(0.35))
                     .font(.caption)
             }
         }

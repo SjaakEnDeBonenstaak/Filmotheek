@@ -22,6 +22,7 @@ struct MovieDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 headerSection
+
                 if viewModel.isLoading {
                     ProgressView()
                         .frame(maxWidth: .infinity)
@@ -35,6 +36,7 @@ struct MovieDetailView: View {
                 watchSection
             }
         }
+        .background(Color.appBackground)
         .navigationTitle(movie.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -46,6 +48,8 @@ struct MovieDetailView: View {
                 )
             }
         }
+        .toolbarBackground(Color.appPrimary, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
         .task(id: movie.id) {
             await viewModel.load(movieID: movie.id)
         }
@@ -86,7 +90,7 @@ struct MovieDetailView: View {
                     }
                     if let rating = detail.voteAverage {
                         Label(String(format: "%.1f / 10", rating), systemImage: "star.fill")
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.appAccent)
                             .font(.subheadline)
                     }
                 }
@@ -268,7 +272,7 @@ struct MovieDetailView: View {
         VStack {
             Spacer()
             HStack {
-                Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                Image(systemName: "checkmark.circle.fill").foregroundStyle(Color.appPrimary)
                 Text("Opgeslagen")
             }
             .padding()

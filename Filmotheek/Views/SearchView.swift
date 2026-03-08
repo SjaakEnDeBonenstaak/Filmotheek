@@ -50,6 +50,9 @@ struct SearchView: View {
                 if viewModel.isLoading { ProgressView() }
             }
         }
+        .toolbarBackground(Color.appPrimary, for: .navigationBar)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(Color.appBackground, for: .tabBar)
     }
 
     // MARK: - Movie list
@@ -62,6 +65,8 @@ struct SearchView: View {
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(Color.appBackground)
     }
 
     @ViewBuilder
@@ -76,13 +81,14 @@ struct SearchView: View {
             .buttonStyle(.plain)
             .listRowBackground(
                 selectedMovie?.id == movie.id
-                    ? Color.accentColor.opacity(0.12)
-                    : Color.clear
+                    ? Color.appAccent.opacity(0.25)
+                    : Color.appBackground
             )
         } else {
             NavigationLink(value: movie) {
                 MovieRowView(movie: movie)
             }
+            .listRowBackground(Color.appBackground)
         }
     }
 
@@ -102,6 +108,7 @@ struct SearchView: View {
             }
             .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             .listRowSeparator(.hidden)
+            .listRowBackground(Color.appBackground)
         }
     }
 
@@ -114,8 +121,8 @@ struct SearchView: View {
                 .font(.caption.bold())
                 .padding(.horizontal, 12)
                 .padding(.vertical, 6)
-                .background(selected ? Color.accentColor : Color.secondary.opacity(0.15))
-                .foregroundStyle(selected ? .white : .primary)
+                .background(selected ? Color.appAccent : Color.appPrimary.opacity(0.12))
+                .foregroundStyle(selected ? Color.appDark : Color.appPrimary)
                 .clipShape(Capsule())
         }
         .buttonStyle(.plain)
