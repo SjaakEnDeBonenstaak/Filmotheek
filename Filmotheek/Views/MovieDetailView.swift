@@ -46,8 +46,12 @@ struct MovieDetailView: View {
                 )
             }
         }
-        .task {
+        .task(id: movie.id) {
             await viewModel.load(movieID: movie.id)
+        }
+        .onChange(of: movie.id) {
+            draftRating = watchedMovie?.rating ?? 3
+            draftComment = watchedMovie?.comment ?? ""
         }
         .onAppear {
             if let watched = watchedMovie {
