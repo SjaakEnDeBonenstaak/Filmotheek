@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct MovieRowView: View {
-    let movie: TMDBMovie
+struct WatchedMovieRowView: View {
+    let movie: WatchedMovie
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -17,14 +17,16 @@ struct MovieRowView: View {
             Text(movie.title)
                 .font(.headline)
                 .lineLimit(2)
-            Text(movie.releaseYear)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-            if let rating = movie.voteAverage {
-                Label(String(format: "%.1f", rating), systemImage: "star.fill")
+            StarRatingReadOnly(rating: movie.rating)
+            if !movie.comment.isEmpty {
+                Text(movie.comment)
                     .font(.caption)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
             }
+            Text(movie.watchedDate.formatted(date: .abbreviated, time: .omitted))
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
         }
     }
 }
